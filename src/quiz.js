@@ -14,7 +14,7 @@ class Quiz {
   }
 
   moveToNextQuestion() {
-    this.currentQuestionIndex++; // Increments the current question index
+    return this.currentQuestionIndex++; // Increments the current question index
   }
 
   shuffleQuestions() {
@@ -32,8 +32,8 @@ class Quiz {
       // Checks if the answer is correct
       this.correctAnswers++; // Increments the correct answers count
       return;
-    } 
-    return 'Wrong answer!'; // Returns a message if the answer is wrong
+    }
+    return "Wrong answer!"; // Returns a message if the answer is wrong
   }
 
   hasEnded() {
@@ -43,5 +43,23 @@ class Quiz {
       return true; // Returns true if the quiz has ended
     }
     return false; // Returns false if the quiz has not ended
+  }
+
+  filterQuestionsByDifficulty(difficulty) {
+    if (difficulty >= 1 && difficulty <= 3) {
+      const filteredQuestions = this.questions.filter(
+        (question) => question.difficulty === difficulty
+      ); // Filters the questions by difficulty
+
+      return (this.questions = filteredQuestions);
+    }
+  }
+
+  averageDifficulty() {
+    const totalDifficulty = this.questions.reduce(
+      (total, question) => total + question.difficulty,
+      0
+    );
+    return totalDifficulty / this.questions.length;
   }
 }
